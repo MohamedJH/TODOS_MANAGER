@@ -7,7 +7,7 @@
       <form @submit.prevent="onSubmit">
         <input type="text" v-model="title" placeholder="Add Todo..." />
         <input type="submit" value="Submit" />
-        <i @click="deleteTodo(todo.id)" class="fas fa-trash-alt"></i>
+        
       </form>
     </div>
   </div>
@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 form {
   display: flex;
 }
