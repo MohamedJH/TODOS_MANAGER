@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <AddTodo />
-    <Todos />
+    <TodosList />
   </div>
 </template>
 
 <script>
-import Todos from "./components/Todos.vue";
+import TodosList from "./components/TodosList.vue";
 import AddTodo from "./components/AddTodo.vue";
 
 export default {
   name: "App",
   components: {
-    Todos,
+    TodosList,
     AddTodo,
   },
 };
@@ -25,7 +25,8 @@ body {
   background: #e8f7f0;
 }
 .container {
-  max-width: 1100px;
+  max-width: 50vw;
+  height:95%;
   margin: auto;
   overflow: auto;
   padding: 0 2rem;

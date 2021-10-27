@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const state = {
-  todos: [],
+  todos: []
 };
 
 const getters = {
-  allTodos: (state) => state.todos,
+  allTodos: (state) => state.todos
 };
 
 const actions = {
@@ -23,17 +23,17 @@ const actions = {
     );
     console.log(response.data);
     commit("addTodo", response.data);
-  },
+  }
 };
 
 const mutations = {
   setTodos: (state, listTodos) => (state.todos = listTodos),
-  addTodo: (state, newTodos) => (state.todos = [newTodos, ...state.todos]),
+  addTodo: (state, newTodos) => (state.todos = [newTodos, ...state.todos])
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

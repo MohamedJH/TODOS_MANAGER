@@ -1,19 +1,14 @@
 <template>
-  <div>
-    <h3>Todos</h3>
-    <div class="legend">
-      <span>Double click to mark as complete</span>
-      <span> <span class="incomplete-box"></span> = Incomplete </span>
-      <span> <span class="complete-box"></span> = Complete </span>
-    </div>
+
+  <div class="dropList">
+    <i @click="handleToggle()" class="fas fa-list-ul  fa-lg" ></i>
+    <i class="fas fa-columns  fa-lg"></i>
   </div>
-  <div class="todos">
-    
+  <div class="[toggle ? 'todos_column':'todos_line']">
     <div v-for="todo in allTodos" :key="todo.id" :class="[todo.completed ? 'completedstate':'todo']">
       {{ todo.title }}
       <i @click="deleteTodo(todo.id)" class="fas fa-times"></i>
     </div>
-    
   </div>
 </template>
 
@@ -23,9 +18,16 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Todos",
-
+  data() {
+    return {
+      toggle:false
+    }
+  },
   methods: {
     ...mapActions(["fetchTodos"]),
+    handleToggle(){
+      this.toggle=true;
+    }
   },
   computed: mapGetters(["allTodos"]),
   created() {
@@ -35,10 +37,30 @@ export default {
 </script>
 
 <style >
-.todos {
+.todos_line {
+  width: 100%;
+  height: 31em;
+  border: 1px solid black;
+  overflow: auto;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3,1fr) !important;
   gap: 1rem;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.todos_line::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.todos_line {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.todos_column{
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  width: 100%;
+  height: 31em;
 }
 .todo {
   display:flex;
@@ -83,34 +105,25 @@ i {
   right: 0px;
   color: #fff;
   cursor: pointer;
+  
 }
 i:before{
   color:#d7da5c;
 }
-.legend {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
+.dropList{
+  float:right;
+  display:flex;
+  justify-content:space-between;
+  width:6%;
+  margin-bottom: 5px;
 }
-.complete-box {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: #35495e;
+
+
+@media (max-width:  500px){
+.todos {
+  grid-template-columns: repeat(1fr);
 }
-.incomplete-box {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: #41b883;
 }
-.is-complete {
-  background: #35495e;
-  color: #fff;
-}
-@media (max-width: 500px) {
-  .todos {
-    grid-template-columns: 1fr;
-  }
-}
+
+
 </style>
