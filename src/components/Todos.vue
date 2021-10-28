@@ -1,20 +1,18 @@
 <template>
 
   <div class="dropList">
-    <i @click="handleToggle()" class="fas fa-list-ul  fa-lg" ></i>
+    <i @click.prevent="handleToggle" class="fas fa-list-ul  fa-lg" ></i>
     <i class="fas fa-columns  fa-lg"></i>
   </div>
-  <div class="[toggle ? 'todos_column':'todos_line']">
+  <div :class="[toggle ? 'todos_column':'todos_line']">
     <div v-for="todo in allTodos" :key="todo.id" :class="[todo.completed ? 'completedstate':'todo']">
       {{ todo.title }}
       <i @click="deleteTodo(todo.id)" class="fas fa-times"></i>
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapActions } from "vuex";
-
 
 export default {
   name: "Todos",
@@ -27,7 +25,7 @@ export default {
     ...mapActions(["fetchTodos"]),
     handleToggle(){
       this.toggle=true;
-    }
+    },
   },
   computed: mapGetters(["allTodos"]),
   created() {
