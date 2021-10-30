@@ -1,16 +1,27 @@
 <template>
   <div class="dropList">
-    <i class="fas fa-list-ul fa-lg"></i>
-    <i class="fas fa-columns fa-lg"></i>
+    <button type="button" @click.prevent="handleDisplay">
+      <i class="fas fa-list-ul fa-lg"></i>
+    </button>
+    <button type="button" @click.prevent="handleDisplaycolumn">
+      <i class="fas fa-columns fa-lg"></i>
+    </button>
   </div>
   <div :class="[toggle ? 'todos_column' : 'todos_line']">
     <div
+      @dblclick="handleState(todo)"
       v-for="todo in allTodos"
       :key="todo.id"
       :class="[todo.completed ? 'completedstate' : 'todo']"
     >
       {{ todo.title }}
-      <i @click="deleteTodo(todo.id)" class="fas fa-times"></i>
+      <button
+        type="button"
+        @click.prevent="deleteTodo(todo.id)"
+        class="DeleteBtn"
+      >
+        <i class="fas fa-times"></i>
+      </button>
     </div>
   </div>
 </template>
@@ -25,7 +36,21 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchTodos", "deleteTodo"]),
+    ...mapActions(["fetchTodos", "deleteTodo", "updateTodo"]),
+    handleDisplay() {
+      this.toggle = true;
+    },
+    handleDisplaycolumn() {
+      this.toggle = false;
+    },
+    handleState(todo) {
+      const updatedTodo = {
+        id: todo.id,
+        title: todo.title,
+        completed: !todo.completed,
+      };
+      this.updateTodo(updatedTodo);
+    },
   },
   computed: mapGetters(["allTodos"]),
   created() {
@@ -34,11 +59,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .todos_line {
   width: 100%;
   height: 31em;
-  border: 1px solid black;
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -60,8 +84,18 @@ export default {
   width: 100%;
   height: 31em;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.todos_column::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.todos_column {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 .todo {
   display: flex;
+
   justify-content: space-between;
   border-top: 2px solid #c790cc;
   border-right: 2px solid #c790cc;
@@ -113,6 +147,16 @@ i:before {
   justify-content: space-between;
   width: 6%;
   margin-bottom: 5px;
+}
+button {
+  display: flex;
+  align-self: flex-start;
+  width: auto;
+  height: auto;
+  padding: auto;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 @media (max-width: 500px) {

@@ -2,7 +2,7 @@
   <div>
     <h3>Todos</h3>
     <div class="legend">
-      <span>Double click to mark as complete</span>
+      <span>Double click to mark as complete or Incomplete</span>
       <span> <span class="incomplete-box"></span> = Incomplete </span>
       <span> <span class="complete-box"></span> = Complete </span>
     </div>
@@ -32,13 +32,13 @@ export default {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: #35495e;
+  background: green;
 }
 .incomplete-box {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: #41b883;
+  background: red;
 }
 .list_body {
   display: flex;
