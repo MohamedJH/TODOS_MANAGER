@@ -1,11 +1,14 @@
 <template>
-
   <div class="dropList">
-    <i @click.prevent="handleToggle" class="fas fa-list-ul  fa-lg" ></i>
-    <i class="fas fa-columns  fa-lg"></i>
+    <i class="fas fa-list-ul fa-lg"></i>
+    <i class="fas fa-columns fa-lg"></i>
   </div>
-  <div :class="[toggle ? 'todos_column':'todos_line']">
-    <div v-for="todo in allTodos" :key="todo.id" :class="[todo.completed ? 'completedstate':'todo']">
+  <div :class="[toggle ? 'todos_column' : 'todos_line']">
+    <div
+      v-for="todo in allTodos"
+      :key="todo.id"
+      :class="[todo.completed ? 'completedstate' : 'todo']"
+    >
       {{ todo.title }}
       <i @click="deleteTodo(todo.id)" class="fas fa-times"></i>
     </div>
@@ -18,14 +21,11 @@ export default {
   name: "Todos",
   data() {
     return {
-      toggle:false
-    }
+      toggle: false,
+    };
   },
   methods: {
-    ...mapActions(["fetchTodos"]),
-    handleToggle(){
-      this.toggle=true;
-    },
+    ...mapActions(["fetchTodos", "deleteTodo"]),
   },
   computed: mapGetters(["allTodos"]),
   created() {
@@ -34,14 +34,14 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .todos_line {
   width: 100%;
   height: 31em;
   border: 1px solid black;
   overflow: auto;
   display: grid;
-  grid-template-columns: repeat(3,1fr) !important;
+  grid-template-columns: repeat(3, 1fr) !important;
   gap: 1rem;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -50,10 +50,10 @@ export default {
 }
 /* Hide scrollbar for IE, Edge and Firefox */
 .todos_line {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
-.todos_column{
+.todos_column {
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(1fr);
@@ -61,12 +61,12 @@ export default {
   height: 31em;
 }
 .todo {
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
   border-top: 2px solid #c790cc;
   border-right: 2px solid #c790cc;
   border-bottom: 2px solid #c790cc;
-  border-left:10px solid red ;
+  border-left: 10px solid red;
   border-radius: 2px solid 20px;
   background-color: #eaecf3;
   color: #703775;
@@ -76,13 +76,13 @@ export default {
   text-align: center;
   cursor: pointer;
 }
-.completedstate{
-  display:flex;
-  justify-content:space-between;
+.completedstate {
+  display: flex;
+  justify-content: space-between;
   border-top: 2px solid #c790cc;
   border-right: 2px solid #c790cc;
   border-bottom: 2px solid #c790cc;
-  border-left:10px solid green ;
+  border-left: 10px solid green;
   border-radius: 2px solid 20px;
   background-color: #eaecf3;
   color: #703775;
@@ -95,33 +95,29 @@ export default {
 }
 
 i {
-  display:flex;
+  display: flex;
   align-self: flex-start;
   border: 2px solid #18031a;
-  align-self:end;
+  align-self: end;
   bottom: 0px;
   right: 0px;
   color: #fff;
   cursor: pointer;
-  
 }
-i:before{
-  color:#d7da5c;
+i:before {
+  color: #d7da5c;
 }
-.dropList{
-  float:right;
-  display:flex;
-  justify-content:space-between;
-  width:6%;
+.dropList {
+  float: right;
+  display: flex;
+  justify-content: space-between;
+  width: 6%;
   margin-bottom: 5px;
 }
 
-
-@media (max-width:  500px){
-.todos {
-  grid-template-columns: repeat(1fr);
+@media (max-width: 500px) {
+  .todos {
+    grid-template-columns: repeat(1fr);
+  }
 }
-}
-
-
 </style>

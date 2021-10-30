@@ -8,21 +8,21 @@
     </div>
   </div>
   <div class="list_body">
-      <Todos />
+    <Todos />
   </div>
 </template>
+
 <script>
-  import Todos from './Todos';
+import Todos from "./Todos";
 
 export default {
-  name:'TodosList',
-  components:{
+  name: "TodosList",
+  components: {
     Todos,
-  }
-}
+  },
+};
 </script>
 <style scoped>
-
 .legend {
   display: flex;
   justify-content: space-around;
@@ -40,9 +40,9 @@ export default {
   height: 10px;
   background: #41b883;
 }
-.list_body{
-  display:flex;
-  flex-direction:column;
+.list_body {
+  display: flex;
+  flex-direction: column;
   max-height: 70%;
 }
 @media (max-width: 500px) {
@@ -50,5 +50,4 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-
 </style>

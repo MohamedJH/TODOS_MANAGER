@@ -7,7 +7,6 @@
       <form @submit.prevent="onSubmit">
         <input type="text" v-model="title" placeholder="Add Todo..." />
         <input type="submit" value="Submit" />
-        
       </form>
     </div>
   </div>
@@ -32,7 +31,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 form {
   display: flex;
 }
